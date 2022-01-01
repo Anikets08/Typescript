@@ -2,7 +2,7 @@ import { Router } from "express";
 const baseRouter = Router();
 
 baseRouter.get("/home", (req, res) => {
-    res.send("Home ");
+    res.send("Home");
 })
 
 baseRouter.get("/user", (req, res) => {
