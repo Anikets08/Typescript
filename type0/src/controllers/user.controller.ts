@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import UserModel from "../model/userRegis.model";
 
 export class UserController {
@@ -26,12 +26,13 @@ export class UserController {
         try {
             console.log("started");
 
-            let { fName, lName, email, phone } = req.body;
+            let { fName, lName, email, phone, password } = req.body;
             const doc = new UserModel({
                 fName: fName,
                 lname: lName,
                 email: email,
-                phone: phone
+                phone: phone,
+                password: password
             })
             const resUser = await doc.save();
             res.send({
