@@ -26,8 +26,6 @@ export class UserController {
 
     static async registerUser(req: Request, res: Response) {
         try {
-            console.log("started");
-
             let { fName, lName, email, phone, password } = req.body;
             const doc = new UserModel({
                 fName: fName,
@@ -38,12 +36,15 @@ export class UserController {
             })
             const resUser = await doc.save();
             res.send({
-                "userData": resUser
+                "userData": resUser,
+                "message": "User registered successfully",
+                "status": 200
             })
         } catch (error: unknown) {
             const { message } = error as Error
             res.send({
-                "error": message,
+                "message": message,
+                "status": 400
             })
         }
 
@@ -87,6 +88,7 @@ export class UserController {
         let { email, password } = req.body;
         UserModel.findOne({ email: email }, (err: any, user: any) => {
             if (err) {
+
                 return res.send({
                     authenticated: false,
                     data: "invalid user"
